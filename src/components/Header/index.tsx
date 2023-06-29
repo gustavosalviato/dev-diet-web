@@ -12,15 +12,15 @@ export function Header() {
         </div>
 
         <nav className='flex items-center ml-16 gap-6'>
-          <Link href="home" className='text-lg transition-all duration-300 hover:text-zinc-300'>
-            Home
+          <Link href="/panel" className='text-lg transition-all duration-300 hover:text-zinc-300'>
+            Panel
           </Link>
 
-          <Link href="home" className='text-lg transition-all duration-300 hover:text-zinc-300'>
+          <Link href="/metrics" className='text-lg transition-all duration-300 hover:text-zinc-300'>
             Metrics
           </Link>
 
-          <Link href="home" className='text-lg transition-all duration-300 hover:text-zinc-300'>
+          <Link href="/" className='text-lg transition-all duration-300 hover:text-zinc-300'>
             Quick access
           </Link>
         </nav>
