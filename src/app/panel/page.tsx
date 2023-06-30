@@ -1,7 +1,5 @@
-import { Button } from "@/components/Button";
+import { CreateNewMealModal } from "@/components/CreateNewMealModal";
 import { Summary } from "@/components/Summary";
-import { Plus } from "lucide-react";
-
 
 export default function PanelPage() {
   return (
@@ -9,8 +7,7 @@ export default function PanelPage() {
       <div className="w-full bg-zinc-800 p-14" />
       <main className="max-w-7xl mx-auto px-4 w-full">
         <Summary />
-        <Button size="large" variant="primary" text="New meal" icon={<Plus />} className="ml-auto mt-12" />
-
+        <CreateNewMealModal />
         <h3 className="text-xl font-semibold">23/05/2023</h3>
 
         <table className="w-full mt-4 border-collapse">

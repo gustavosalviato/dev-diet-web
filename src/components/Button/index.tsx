@@ -8,10 +8,11 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   size: 'medium' | 'large'
 }
 
-export const Button = forwardRef<HTMLInputElement, ButtonProps>(
-  ({ icon, text, variant, size, className, ...props }: ButtonProps) => {
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ icon, text, variant, size, className, ...props }: ButtonProps, ref) => {
     return (
       <button
+        ref={ref}
         {...props}
         className={clsx('rounded-md font-semibold min-w-120 px-4 flex items-center justify-center gap-2 text-zinc-50 cursor-pointer transition-all duration-300', className, {
           'text-zinc-900 bg-zinc-100 hover:bg-zinc-100/80': variant === 'primary',
