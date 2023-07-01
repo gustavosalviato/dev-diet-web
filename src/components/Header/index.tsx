@@ -16,8 +16,8 @@ export function Header() {
             Panel
           </Link>
 
-          <Link href="/metrics" className='text-lg transition-all duration-300 hover:text-zinc-300'>
-            Metrics
+          <Link href="/overview" className='text-lg transition-all duration-300 hover:text-zinc-300'>
+            Overview 
           </Link>
 
           <Link href="/" className='text-lg transition-all duration-300 hover:text-zinc-300'>
