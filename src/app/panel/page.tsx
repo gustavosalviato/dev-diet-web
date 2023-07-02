@@ -13,10 +13,19 @@ export default function PanelPage() {
         <thead>
           <tr>
             <th className="p-4 text-left bg-zinc-700 text-sm font-semibold w-[5%] first:rounded-tl-md">
-              Time
+              Name
             </th>
             <th className="p-4 text-left bg-zinc-700 text-sm font-semibold flex-1">
-              Meal
+              Description
+            </th>
+
+            <th className="p-4 text-left bg-zinc-700 text-sm font-semibold flex-1">
+              Date
+            </th>
+
+
+            <th className="p-4 text-left bg-zinc-700 text-sm font-semibold flex-1">
+              Time
             </th>
 
             <th className="p-4 text-left bg-zinc-700 text-sm font-semibold flex-1">
@@ -33,12 +42,23 @@ export default function PanelPage() {
           <tr>
             <td
               className="p-4 text-sm font-semibold text-left w-[5%] after:content-['|'] after:w-[1px] after:h-full after:ml-4 after:text-zinc-700 bg-zinc-800 first:rounded-tl-md first:rounded-bl-md border-t-4 border-zinc-900"
-            >12:30
+            >Brunch
             </td>
 
             <td
               className="p-4 text-sm font-semibold text-left flex-1 bg-zinc-800 border-t-4 border-zinc-900"
             >Lorem ipsum dolor sit, amet consectetur adipisicing elit. Rem, deserunt.
+            </td>
+
+            <td
+              className="p-4 text-sm font-semibold text-left flex-1 bg-zinc-800 border-t-4 border-zinc-900"
+            >Mar, 25 2011
+            </td>
+
+
+            <td
+              className="p-4 text-sm font-semibold text-left flex-1 bg-zinc-800 border-t-4 border-zinc-900"
+            >11:30
             </td>
 
             <td
