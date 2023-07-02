@@ -37,7 +37,7 @@ export function makeServer() {
 
 
     seeds(server) {
-      server.createList('meal', 200)
+      server.createList('meal', 10)
     },
 
     routes() {

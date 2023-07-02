@@ -11,10 +11,9 @@ export function CreateNewMealModal() {
     <Dialog.Root>
       <Dialog.Trigger asChild>
         <Button
-          size="large"
+          size="medium"
           variant="primary"
           text="New meal"
-          className='ml-auto mt-10'
           icon={<Plus />}
         />
       </Dialog.Trigger>
