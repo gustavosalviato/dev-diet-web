@@ -8,6 +8,7 @@ import { Header } from '@/components/Header'
 import { QueryClientProvider, } from 'react-query'
 import { queryClient } from '@/services/react-query'
 import { makeServer } from '@/services/mirage'
+import { ReactQueryDevtools } from 'react-query/devtools'
 
 const roboto = Roboto({
   weight: ['400', '500', '700'],
@@ -30,6 +31,7 @@ export default function RootLayout({
           <Header />
           {children}
         </body>
+        <ReactQueryDevtools />
       </QueryClientProvider>
     </html>
   )

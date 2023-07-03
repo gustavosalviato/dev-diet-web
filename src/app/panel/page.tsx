@@ -5,12 +5,11 @@ import { GanttChart } from 'lucide-react'
 import Link from 'next/link'
 import { useQuery } from 'react-query'
 import CircularProgress from '@mui/joy/CircularProgress'
-import Box from '@mui/joy/Box'
 
 
 
 export default function PanelPage() {
-  const { data, isLoading, error } = useQuery('meals', async () => {
+  const { data, isLoading, isFetching, error } = useQuery('meals', async () => {
     const mealsResponse = await fetch('/api/meals')
     const data = await mealsResponse.json()
 
@@ -24,13 +23,21 @@ export default function PanelPage() {
     }))
 
     return meals
+  }, {
+    staleTime: 1000 * 5
   })
 
   return (
     <main className="max-w-7xl mx-auto px-4 w-full">
       <div className="flex bg-zinc-800 border border-zinc-700 p-6 my-8 rounded flex-col">
         <header className="flex items-start justify-between w-full">
-          <h2 className="text-2xl font-sans">Meals</h2>
+          <div className="flex items-center gap-3">
+            <h2 className="text-2xl font-sans">Meals</h2>
+            {!isLoading && isFetching && (
+              <CircularProgress size="sm" variant="plain" color="info" />
+            )}
+          </div>
+
           <CreateNewMealModal />
         </header>
 

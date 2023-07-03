@@ -41,7 +41,7 @@ export function makeServer() {
     },
 
     routes() {
-      this.namespace = '/api'
+      this.namespace = 'api'
       this.timing = 750
 
       this.get('/meals')
