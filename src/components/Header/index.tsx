@@ -1,6 +1,6 @@
 import { Github, Salad } from 'lucide-react'
 import Link from 'next/link'
-import { Button } from '../Button'
+
 import { MenuMobile } from '../DropDownMenu'
 
 export function Header() {
@@ -37,13 +37,13 @@ export function Header() {
           </Link>
         </nav>
 
-        <Button
-          text="Sign in with Github"
-          variant="secondary"
-          size="large"
-          className="hidden ml-auto md:flex"
-          icon={<Github />}
-        />
+        <a
+          href={`https://github.com/login/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_GIT_HUB_CLIENT_ID}`}
+          className="hidden ml-auto md:flex gap-2 bg-zinc-900 px-4 h-12 items-center justify-center rounded focus:outline-none focus:shadow-sm hover:bg-zinc-900/60 duration-300 transition-colors"
+        >
+          <Github />
+          Sign in with Github
+        </a>
 
         <MenuMobile />
       </header>
