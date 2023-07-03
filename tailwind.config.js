@@ -8,7 +8,10 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Roboto", "sans-serif"],
+        sans: ['Roboto', 'sans-serif'],
+      },
+      boxShadow: {
+        sm: '0 0 0 2px #6366f1',
       },
     },
   },

@@ -1,6 +1,7 @@
 import { Github, Salad } from 'lucide-react'
 import Link from 'next/link'
 import { Button } from '../Button'
+import { MenuMobile } from '../DropDownMenu'
 
 export function Header() {
   return (
@@ -13,7 +14,7 @@ export function Header() {
           </strong>
         </div>
 
-        <nav className="flex items-center ml-16 gap-6">
+        <nav className="items-center ml-16 gap-6 hidden md:flex">
           <Link
             href="/panel"
             className="text-lg transition-all duration-300 hover:text-zinc-300"
@@ -40,9 +41,11 @@ export function Header() {
           text="Sign in with Github"
           variant="secondary"
           size="large"
-          className="ml-auto"
+          className="hidden ml-auto md:flex"
           icon={<Github />}
         />
+
+        <MenuMobile />
       </header>
     </div>
   )
