@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint:fix": "eslint src/**/*.ts* --fix"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
@@ -21,8 +21,8 @@
     "@types/react": "18.2.14",
     "@types/react-dom": "18.2.6",
     "autoprefixer": "10.4.14",
+    "axios": "^1.4.0",
     "clsx": "^1.2.1",
-    "eslint": "8.43.0",
     "eslint-config-next": "13.4.7",
     "lucide-react": "^0.256.0",
     "next": "13.4.7",
@@ -37,6 +37,8 @@
   },
   "devDependencies": {
     "@faker-js/faker": "^8.0.2",
+    "@rocketseat/eslint-config": "^1.2.0",
+    "eslint": "^8.44.0",
     "miragejs": "^0.1.47"
   }
 }

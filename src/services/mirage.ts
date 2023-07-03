@@ -4,7 +4,7 @@ import { faker } from '@faker-js/faker'
 interface Meal {
   name: string
   description: string
-  date: string,
+  date: string
   time: string
   isOnDiet: boolean
 }
@@ -12,7 +12,7 @@ interface Meal {
 export function makeServer() {
   const server = createServer({
     models: {
-      meal: Model.extend<Partial<Meal>>({})
+      meal: Model.extend<Partial<Meal>>({}),
     },
 
     factories: {
@@ -32,9 +32,8 @@ export function makeServer() {
         isOnDiet() {
           return faker.datatype.boolean()
         },
-      })
+      }),
     },
-
 
     seeds(server) {
       server.createList('meal', 10)
@@ -48,8 +47,6 @@ export function makeServer() {
       this.post('/meals')
     },
   })
-
-
 
   return server
 }
