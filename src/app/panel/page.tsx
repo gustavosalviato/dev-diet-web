@@ -3,31 +3,11 @@
 import { CreateNewMealModal } from '@/components/CreateNewMealModal'
 import { GanttChart } from 'lucide-react'
 import Link from 'next/link'
-import { useQuery } from 'react-query'
 import CircularProgress from '@mui/joy/CircularProgress'
-import { api } from '@/services/axios'
+import { useMeals } from '@/hooks/meals/useMeals'
 
 export default function PanelPage() {
-  const { data, isLoading, isFetching, error } = useQuery(
-    'meals',
-    async () => {
-      const { data } = await api.get('/meals')
-
-      const meals = data.meals.map((meal: any) => ({
-        ...meal,
-        date: new Date(meal.date).toLocaleDateString('en-US', {
-          day: '2-digit',
-          month: 'short',
-          year: 'numeric',
-        }),
-      }))
-
-      return meals
-    },
-    {
-      staleTime: 1000 * 5,
-    },
-  )
+  const { data, isLoading, isFetching, error } = useMeals()
 
   return (
     <main className="max-w-7xl mx-auto px-4 w-full">
@@ -80,7 +60,7 @@ export default function PanelPage() {
               </tr>
             </thead>
             <tbody className="mt-2">
-              {data?.map((meal: any) => (
+              {data?.map((meal) => (
                 <tr key={meal.id} className="border-b border-b-zinc-700">
                   <td className="p-4 text-sm font-semibold text-left bg-zinc-800 first:rounded-tl-md first:rounded-bl-md border-zinc-900">
                     {meal.name}
@@ -102,7 +82,7 @@ export default function PanelPage() {
                     className="p-4 text-sm font-semibold text-right
                bg-zinc-800 last:rounded-tr-md last:rounded-br-md border-zinc-900"
                   >
-                    <Link href={`/meal/${'test_url'}`}>
+                    <Link href={`/meal/${meal.id}`}>
                       <GanttChart
                         aria-label="View meal"
                         className="duration-300 transition-colors hover:text-indigo-400"

@@ -10,6 +10,11 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import * as zod from 'zod'
 import { ErrorMessage } from '../ErrorMessage'
 
+interface RadioOptions {
+  value: string
+  label: string
+}
+
 const MealFormValidationSchema = zod.object({
   name: zod.string().min(5, {
     message: 'name must contain at least 5 characters',
@@ -24,7 +29,16 @@ const MealFormValidationSchema = zod.object({
   }),
 })
 
-const radioOptions = ['ondiet', 'offdiet']
+const radioOptions: RadioOptions[] = [
+  {
+    label: 'Yes',
+    value: 'ondiet',
+  },
+  {
+    label: 'No',
+    value: 'offdiet',
+  },
+]
 
 type MealFormData = zod.infer<typeof MealFormValidationSchema>
 
@@ -140,11 +154,11 @@ export function CreateNewMealModal() {
               {radioOptions.map((item) => {
                 return (
                   <RadioGroup.Item
-                    value={item}
-                    key={item}
+                    value={item.value}
+                    key={item.value}
                     className="duration-300 transition-colors flex items-center gap-2 px-4 py-3 font-bold rounded bg-zinc-900 border-2 border-zinc-700 w-1/2 justify-center data-[state=checked]:bg-zinc-100 data-[state=checked]:text-zinc-900 data-[state=checked]:border-indigo-500"
                   >
-                    {item}
+                    {item.label}
                   </RadioGroup.Item>
                 )
               })}
