@@ -104,3 +104,10 @@ export default function PanelPage() {
     </main>
   )
 }
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  console.log('oi')
+  return {
+    props: {},
+  }
+}
