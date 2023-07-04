@@ -7,17 +7,12 @@ import { Roboto } from 'next/font/google'
 import { Header } from '@/components/Header'
 import { QueryClientProvider } from 'react-query'
 import { queryClient } from '@/services/react-query'
-import { makeServer } from '@/services/mirage'
 import { ReactQueryDevtools } from 'react-query/devtools'
 
 const roboto = Roboto({
   weight: ['400', '500', '700'],
   subsets: ['latin'],
 })
-
-if (process.env.NODE_ENV === 'development') {
-  makeServer()
-}
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (

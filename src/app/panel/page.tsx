@@ -71,11 +71,11 @@ export default function PanelPage() {
                   </td>
 
                   <td className="p-4 text-sm font-semibold text-left flex-1 bg-zinc-800 border-zinc-900">
-                    {meal.date}
+                    {meal.createdAt}
                   </td>
 
                   <td className="p-4 text-sm font-semibold text-left flex-1 bg-zinc-800 border-zinc-900">
-                    {meal.time}
+                    {meal.hour}
                   </td>
 
                   <td
@@ -103,11 +103,4 @@ export default function PanelPage() {
       </div>
     </main>
   )
-}
-
-export const getServerSideProps: GetServerSideProps = async () => {
-  console.log('oi')
-  return {
-    props: {},
-  }
 }

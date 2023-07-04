@@ -9,6 +9,11 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as zod from 'zod'
 import { ErrorMessage } from '../ErrorMessage'
+import { useMutation } from 'react-query'
+import { api } from '@/services/axios'
+import { UseUser } from '@/hooks/auth/useUser'
+import { queryClient } from '@/services/react-query'
+import { useState } from 'react'
 
 interface RadioOptions {
   value: string
@@ -22,8 +27,8 @@ const MealFormValidationSchema = zod.object({
   description: zod.string().min(5, {
     message: 'description must contain at least 5 characters',
   }),
-  date: zod.string(),
-  time: zod.string(),
+  createdAt: zod.string(),
+  hour: zod.string(),
   mealType: zod.string({
     required_error: 'inform if the meal is within the diet or not',
   }),
@@ -43,21 +48,50 @@ const radioOptions: RadioOptions[] = [
 type MealFormData = zod.infer<typeof MealFormValidationSchema>
 
 export function CreateNewMealModal() {
+  const [isModalOpen, setIsModalOpen] = useState(false)
   const {
     handleSubmit,
     register,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     setValue,
+    reset,
   } = useForm<MealFormData>({
     resolver: zodResolver(MealFormValidationSchema),
   })
 
+  const user = UseUser()
+
+  const createMeal = useMutation(
+    async (meal: MealFormData) => {
+      const response = await api.post('meals', {
+        userId: user?.sub,
+        name: meal.name,
+        description: meal.description,
+        createdAt: new Date(meal.createdAt).toISOString(),
+        hour: meal.hour,
+        isOnDiet: meal.mealType === 'ondiet',
+      })
+
+      return response.data
+    },
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries('meals')
+      },
+    },
+  )
+
   async function handleCreateMeal(data: MealFormData) {
-    console.log(data)
+    try {
+      await createMeal.mutateAsync(data)
+    } finally {
+      setIsModalOpen(false)
+      reset()
+    }
   }
 
   return (
-    <Dialog.Root>
+    <Dialog.Root open={isModalOpen} onOpenChange={setIsModalOpen}>
       <Dialog.Trigger asChild>
         <Button
           size="medium"
@@ -123,19 +157,21 @@ export function CreateNewMealModal() {
                   id="name"
                   type="date"
                   placeholder="Your meal"
-                  {...register('date')}
+                  {...register('createdAt')}
                 />
 
-                {errors.date && <ErrorMessage error={errors.date.message} />}
+                {errors.createdAt && (
+                  <ErrorMessage error={errors.createdAt.message} />
+                )}
               </div>
 
               <div className="mt-5 w-1/2">
                 <label htmlFor="name" className="mb-2 font-medium">
                   Time
                 </label>
-                <TextInput id="name" type="time" {...register('time')} />
+                <TextInput id="name" type="time" {...register('hour')} />
 
-                {errors.time && <ErrorMessage error={errors.time.message} />}
+                {errors.hour && <ErrorMessage error={errors.hour.message} />}
               </div>
             </div>
 
@@ -170,6 +206,7 @@ export function CreateNewMealModal() {
               text="Send"
               type="submit"
               className="mt-3"
+              disabled={isSubmitting}
             />
           </form>
         </Dialog.Content>

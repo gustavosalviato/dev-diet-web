@@ -11,7 +11,6 @@ export function Avatar({ href }: AvatarProps) {
       <RadixAvatar.Image src={href} className="w-full h-full object-cover" />
 
       <RadixAvatar.AvatarFallback
-        delayMs={600}
         className="flex justify-center items-center rounded bg-zinc-900
         w-10 h-10
         "
