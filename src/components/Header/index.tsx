@@ -45,13 +45,6 @@ export function Header() {
           >
             Overview
           </Link>
-
-          <Link
-            href="/"
-            className="text-lg transition-all duration-300 hover:text-zinc-300"
-          >
-            Quick access
-          </Link>
         </nav>
 
         {token && (
@@ -60,8 +53,8 @@ export function Header() {
             <div className="flex flex-col">
               <p>{user?.name}</p>
               <a
-                href={`https://github.com/login/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_GIT_HUB_CLIENT_ID}`}
-                className="hover:underline inline-block text-zinc-200 duration-300 transition-all mr-1"
+                href="/api/auth/logout"
+                className="hover:underline inline-block text-zinc-200 duration-300 transition-all mr-1 hover:text-red-300"
               >
                 logout
               </a>
@@ -73,12 +66,12 @@ export function Header() {
           <div className="flex ml-auto gap-2 items-center">
             <Avatar href="" />
             <p className="text-sm">
-              <a
+              <Link
                 href={`https://github.com/login/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_GIT_HUB_CLIENT_ID}`}
                 className="inline-block text-zinc-200 duration-300 transition-all mr-1 hover:underline"
               >
                 Create
-              </a>
+              </Link>
               your account
             </p>
           </div>
