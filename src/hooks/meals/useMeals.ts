@@ -15,7 +15,7 @@ export async function getMeals(): Promise<Meal[]> {
 
   const { data } = await api.get(`/meals/${user?.sub}`)
 
-  const meals = data.meals.map((meal: any) => ({
+  const meals = data.meals.map((meal: Meal) => ({
     ...meal,
     createdAt: new Date(meal.createdAt).toLocaleDateString('en-US', {
       day: '2-digit',
@@ -29,6 +29,6 @@ export async function getMeals(): Promise<Meal[]> {
 
 export function useMeals() {
   return useQuery('meals', getMeals, {
-    staleTime: 1000 * 5, // 5 seconds
+    staleTime: 1000 * 60 * 10, // 10 minutes
   })
 }
