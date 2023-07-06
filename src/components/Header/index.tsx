@@ -33,6 +33,13 @@ export function Header() {
 
         <nav className="items-center ml-16 gap-6 hidden md:flex">
           <Link
+            href="/"
+            className="text-lg transition-all duration-300 hover:text-zinc-300"
+          >
+            Home
+          </Link>
+
+          <Link
             href="/panel"
             className="text-lg transition-all duration-300 hover:text-zinc-300"
           >
@@ -40,7 +47,7 @@ export function Header() {
           </Link>
 
           <Link
-            href="/overview"
+            href={`/overview/${user?.sub}`}
             className="text-lg transition-all duration-300 hover:text-zinc-300"
           >
             Overview
