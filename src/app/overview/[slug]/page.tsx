@@ -34,6 +34,7 @@ export default function OverViewPage() {
 
   return (
     <main className="max-w-6xl w-full px-4 mx-auto">
+      <title>Dev Diet | Overview</title>
       <div className="flex flex-col my-8">
         <h2 className="text-2xl font-bold leading-tight">
           Hey, <strong className="text-indigo-400">{user?.name}</strong>

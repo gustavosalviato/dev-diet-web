@@ -11,6 +11,7 @@ export default function PanelPage() {
 
   return (
     <main className="max-w-7xl mx-auto px-4 w-full">
+      <title>Dev Diet | Panel</title>
       <div className="flex bg-zinc-800 border border-zinc-700 p-6 my-8 rounded flex-col">
         <header className="flex items-start justify-between w-full">
           <div className="flex items-center gap-3">

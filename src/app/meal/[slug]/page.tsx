@@ -30,6 +30,7 @@ export default function MealSlugPage() {
 
   return (
     <main className="max-w-7xl px-4 mx-auto w-full">
+      <title>Dev Diet | Meal</title>
       <div className="flex flex-col mt-12 items-start">
         <Link
           href="/panel"

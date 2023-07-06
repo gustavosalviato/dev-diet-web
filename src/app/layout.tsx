@@ -15,6 +15,24 @@ const roboto = Roboto({
   subsets: ['latin'],
 })
 
+export const metadata = {
+  generator: 'Next.js',
+  applicationName: 'Next.js',
+  referrer: 'origin-when-cross-origin',
+  keywords: ['Next.js', 'React', 'JavaScript'],
+  authors: [
+    { name: 'Gustavo Salviato', url: 'https://gustavosalviatoz.vercel.app/' },
+  ],
+  colorScheme: 'dark',
+  creator: 'Gustavo Salviato',
+  publisher: 'Gustavo Salviato',
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+}
+
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={roboto.className}>
