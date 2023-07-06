@@ -1,4 +1,5 @@
 'use client'
+import 'react-toastify/dist/ReactToastify.css'
 
 import './globals.css'
 
@@ -22,6 +23,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <Header />
           {children}
         </body>
+
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </html>
