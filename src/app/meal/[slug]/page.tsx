@@ -1,12 +1,12 @@
 'use client'
 
-import { Button } from '@/components/Button'
 import { DeleteMealModal } from '@/components/DeleteMealModal'
-import { ArrowLeft, Edit, ThumbsDown, ThumbsUp } from 'lucide-react'
+import { ArrowLeft, ThumbsDown, ThumbsUp } from 'lucide-react'
 import { useParams } from 'next/navigation'
 import Link from 'next/link'
 import { useQuery } from 'react-query'
 import { api } from '@/services/axios'
+import { UpdateMealModal } from '@/components/UpdateMealModal'
 
 interface Meal {
   id: string
@@ -62,12 +62,13 @@ export default function MealSlugPage() {
           {data?.isOnDiet ? 'within diet' : 'off diet'}
         </div>
 
-        <div className="flex items-center gap-5 mt-12">
-          <Button
-            text="Edit meal"
-            size="large"
-            variant="secondary"
-            icon={<Edit size={18} />}
+        <div className="flex items-center mt-5">
+          <UpdateMealModal
+            mealId={params?.slug}
+            name={data?.name!}
+            description={data?.description!}
+            createdAt={data?.createdAt!}
+            hour={data?.hour!}
           />
           <DeleteMealModal slug={params?.slug} />
         </div>
