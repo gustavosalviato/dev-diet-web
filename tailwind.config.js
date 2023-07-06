@@ -6,7 +6,14 @@ module.exports = {
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: ['Roboto', 'sans-serif'],
+      },
+      boxShadow: {
+        sm: '0 0 0 2px #6366f1',
+      },
+    },
   },
   plugins: [],
 }

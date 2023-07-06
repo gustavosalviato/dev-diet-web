@@ -3,7 +3,7 @@
 import * as Dialog from '@radix-ui/react-dialog'
 import * as RadioGroup from '@radix-ui/react-radio-group'
 import { Button } from '../Button'
-import { Plus, X } from 'lucide-react'
+import { Edit, X } from 'lucide-react'
 import { TextInput } from '../TextInput'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -11,7 +11,6 @@ import * as zod from 'zod'
 import { ErrorMessage } from '../ErrorMessage'
 import { useMutation } from 'react-query'
 import { api } from '@/services/axios'
-import { UseUser } from '@/hooks/auth/useUser'
 import { queryClient } from '@/services/react-query'
 import { useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify'
@@ -49,7 +48,21 @@ const radioOptions: RadioOptions[] = [
 
 type MealFormData = zod.infer<typeof MealFormValidationSchema>
 
-export function CreateNewMealModal() {
+interface UpdateMealModalProps {
+  mealId: string
+  name: string
+  description: string
+  createdAt: string
+  hour: string
+}
+
+export function UpdateMealModal({
+  mealId,
+  createdAt,
+  description,
+  hour,
+  name,
+}: UpdateMealModalProps) {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const {
     handleSubmit,
@@ -61,12 +74,9 @@ export function CreateNewMealModal() {
     resolver: zodResolver(MealFormValidationSchema),
   })
 
-  const user = UseUser()
-
-  const createMeal = useMutation(
+  const updateMeal = useMutation(
     async (meal: MealFormData) => {
-      const response = await api.post('meals', {
-        userId: user?.sub,
+      const response = await api.put(`/meals/${mealId}`, {
         name: meal.name,
         description: meal.description,
         createdAt: new Date(meal.createdAt).toISOString(),
@@ -85,9 +95,9 @@ export function CreateNewMealModal() {
 
   async function handleCreateMeal(data: MealFormData) {
     try {
-      await createMeal.mutateAsync(data)
+      await updateMeal.mutateAsync(data)
 
-      toast('Meal successfully created', {
+      toast('Meal successfully updated', {
         type: 'success',
       })
     } catch (err) {
@@ -116,10 +126,11 @@ export function CreateNewMealModal() {
       <Dialog.Root open={isModalOpen} onOpenChange={setIsModalOpen}>
         <Dialog.Trigger asChild>
           <Button
-            size="medium"
-            variant="primary"
-            text="New meal"
-            icon={<Plus />}
+            text="Edit meal"
+            size="large"
+            variant="secondary"
+            icon={<Edit size={18} />}
+            className="mr-5"
           />
         </Dialog.Trigger>
 
@@ -131,7 +142,7 @@ export function CreateNewMealModal() {
               onSubmit={handleSubmit(handleCreateMeal)}
             >
               <Dialog.Title className="text-2xl font-bold leading-tight">
-                New Meal
+                Update Meal
               </Dialog.Title>
 
               <Dialog.Close asChild>
@@ -151,7 +162,7 @@ export function CreateNewMealModal() {
                 type="text"
                 placeholder="Your meal"
                 {...register('name')}
-                className=""
+                defaultValue={name}
               />
 
               {errors.name && <ErrorMessage error={errors.name.message} />}
@@ -164,6 +175,7 @@ export function CreateNewMealModal() {
                 className="bg-zinc-900 rounded min-h-[7.5rem] resize-none font-medium py-2 px-3 flex items-center border-2 border-transparent outline-0 focus:border-zinc-100 duration-300 transition-colors placeholder:text-zinc-700"
                 placeholder="Describe your meal"
                 {...register('description')}
+                defaultValue={description}
               />
 
               {errors.description && (
@@ -180,6 +192,7 @@ export function CreateNewMealModal() {
                     type="date"
                     placeholder="Your meal"
                     {...register('createdAt')}
+                    defaultValue={createdAt}
                   />
 
                   {errors.createdAt && (
@@ -191,7 +204,12 @@ export function CreateNewMealModal() {
                   <label htmlFor="name" className="mb-2 font-medium">
                     Time
                   </label>
-                  <TextInput id="name" type="time" {...register('hour')} />
+                  <TextInput
+                    id="name"
+                    type="time"
+                    {...register('hour')}
+                    defaultValue={hour}
+                  />
 
                   {errors.hour && <ErrorMessage error={errors.hour.message} />}
                 </div>

@@ -1,11 +1,11 @@
-import { InputHTMLAttributes, forwardRef } from "react"
+import { InputHTMLAttributes, forwardRef } from 'react'
 
-interface TextInput extends InputHTMLAttributes<HTMLInputElement> {
+interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
   id: string | undefined
 }
 
-export const TextInput = forwardRef<HTMLInputElement, TextInput>(
-  ({ id, ...props }: TextInput, ref) => {
+export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
+  ({ id, ...props }: TextInputProps, ref) => {
     return (
       <div className="bg-zinc-900 border-2 border-transparent transition-colors duration-300 focus-within:border-zinc-100 rounded py-2 px-3 flex items-center text-zinc-100">
         <input
@@ -15,7 +15,6 @@ export const TextInput = forwardRef<HTMLInputElement, TextInput>(
           className="bg-transparent w-full focus:outline-none placeholder:text-zinc-700"
         />
       </div>
-
     )
   },
 )

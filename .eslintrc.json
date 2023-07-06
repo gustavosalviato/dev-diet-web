@@ -1,3 +1,7 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": "@rocketseat/eslint-config/react",
+  "rules": {
+    "no-document-import-in-page": "off",
+    "no-page-custom-font": "off"
+  }
 }
