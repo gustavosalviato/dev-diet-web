@@ -69,7 +69,7 @@ export default function MealSlugPage() {
             variant="secondary"
             icon={<Edit size={18} />}
           />
-          <DeleteMealModal />
+          <DeleteMealModal slug={params?.slug} />
         </div>
       </div>
     </main>
