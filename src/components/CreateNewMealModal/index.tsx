@@ -15,6 +15,7 @@ import { UseUser } from '@/hooks/auth/useUser'
 import { queryClient } from '@/services/react-query'
 import { useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify'
+import { AxiosError } from 'axios'
 
 interface RadioOptions {
   value: string
@@ -86,13 +87,15 @@ export function CreateNewMealModal() {
     try {
       await createMeal.mutateAsync(data)
 
-      toast('Meal created with success', {
+      toast('Meal successfully created', {
         type: 'success',
       })
-    } catch (err: any) {
-      toast(err.message, {
-        type: 'error',
-      })
+    } catch (err) {
+      if (err instanceof AxiosError) {
+        toast(err.response?.data.message, {
+          type: 'error',
+        })
+      }
     } finally {
       setIsModalOpen(false)
       reset()

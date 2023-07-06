@@ -8,6 +8,7 @@ import { useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify'
 import { useMutation } from 'react-query'
 import { queryClient } from '@/services/react-query'
+import { AxiosError } from 'axios'
 
 interface DeleteMealModalProps {
   slug: string
@@ -31,13 +32,15 @@ export function DeleteMealModal({ slug }: DeleteMealModalProps) {
     try {
       setIsLoading(true)
       deleteMeal.mutateAsync()
-      toast('Your meal was deleted with success', {
+      toast('Meal successfully deleted', {
         type: 'success',
       })
-    } catch (err: any) {
-      toast(err, {
-        type: 'error',
-      })
+    } catch (err) {
+      if (err instanceof AxiosError) {
+        toast(err.response?.data.message, {
+          type: 'error',
+        })
+      }
     } finally {
       setIsLoading(false)
     }
