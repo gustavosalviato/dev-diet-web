@@ -6,6 +6,8 @@ import { Trash } from 'lucide-react'
 import { api } from '@/services/axios'
 import { useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify'
+import { useMutation } from 'react-query'
+import { queryClient } from '@/services/react-query'
 
 interface DeleteMealModalProps {
   slug: string
@@ -14,11 +16,21 @@ interface DeleteMealModalProps {
 export function DeleteMealModal({ slug }: DeleteMealModalProps) {
   const [isLoading, setIsLoading] = useState(false)
 
+  const deleteMeal = useMutation(
+    async () => {
+      await api.delete(`/meals/${slug}`)
+    },
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries('meals')
+      },
+    },
+  )
+
   async function handleDeleteMeal() {
     try {
       setIsLoading(true)
-      await api.delete(`/meals/${slug}`)
-
+      deleteMeal.mutateAsync()
       toast('Your meal was deleted with success', {
         type: 'success',
       })
