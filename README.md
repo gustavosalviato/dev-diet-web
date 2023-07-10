@@ -1,4 +1,4 @@
-```jsx
+
 <h1 align="center"> Dev Diet </h1>
 
 <p align="center">
@@ -14,6 +14,7 @@
 
 ## Get Start
 
+```jsx
 To run the application follow the steps about:
 
 1- Clone the project
