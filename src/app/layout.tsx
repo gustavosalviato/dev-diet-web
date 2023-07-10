@@ -1,4 +1,6 @@
+/* eslint-disable no-unused-vars */
 'use client'
+
 import 'react-toastify/dist/ReactToastify.css'
 
 import './globals.css'
@@ -15,7 +17,7 @@ const roboto = Roboto({
   subsets: ['latin'],
 })
 
-export const metadata = {
+const metadata = {
   generator: 'Next.js',
   applicationName: 'Next.js',
   referrer: 'origin-when-cross-origin',
