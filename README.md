@@ -63,5 +63,5 @@ This project is MIT
 
 ---
 
-Made whit 💜 by gustavosalviato :wave: [Make contact](https://www.linkedin.com/in/gustavo-salviato-910048212/)
+Made with 💜 by gustavosalviato :wave: [Make contact](https://www.linkedin.com/in/gustavo-salviato-910048212/)
 ```
