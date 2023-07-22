@@ -1,7 +1,11 @@
 {
   "extends": "@rocketseat/eslint-config/react",
+  "plugins": [
+    "prettier"
+  ],
   "rules": {
     "no-document-import-in-page": "off",
-    "no-page-custom-font": "off"
+    "no-page-custom-font": "off",
+    "dot-notation": "off"
   }
 }

@@ -2,6 +2,7 @@
 'use client'
 
 import 'react-toastify/dist/ReactToastify.css'
+import { useRouter, usePathname } from 'next/navigation'
 
 import './globals.css'
 
@@ -11,6 +12,7 @@ import { Header } from '@/components/Header'
 import { QueryClientProvider } from 'react-query'
 import { queryClient } from '@/services/react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
+import { AuthContextProvider } from '@/context/authContext'
 
 const roboto = Roboto({
   weight: ['400', '500', '700'],
@@ -36,13 +38,19 @@ const metadata = {
 }
 
 export default function RootLayout({ children }: { children: ReactNode }) {
+  const path = usePathname()
+
   return (
     <html lang="en" className={roboto.className}>
       <QueryClientProvider client={queryClient}>
-        <body className="bg-zinc-900 text-zinc-50">
-          <Header />
-          {children}
-        </body>
+        <AuthContextProvider>
+          <body className="bg-zinc-900 text-zinc-50">
+            {!path.startsWith('/login') && !path.startsWith('/signup') && (
+              <Header />
+            )}
+            {children}
+          </body>
+        </AuthContextProvider>
 
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
