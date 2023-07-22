@@ -1,8 +1,16 @@
+'use client'
+
+import { motion } from 'framer-motion'
 import Image from 'next/image'
 
 export function HeroSection() {
   return (
-    <div className="md:grid-cols-2 grid grid-cols-1 gap-32">
+    <motion.div
+      className="md:grid-cols-2 grid grid-cols-1 gap-32"
+      initial={{ opacity: 0, x: 20 }}
+      animate={{ opacity: 1, x: 0, transition: { delay: 0.3 } }}
+      exit={{ opacity: 0, x: 20 }}
+    >
       <Image
         src="/meditating.svg"
         alt="Girl meditating"
@@ -23,6 +31,6 @@ export function HeroSection() {
           <span className="textindigf">balanced nutrition</span>
         </strong>
       </div>
-    </div>
+    </motion.div>
   )
 }

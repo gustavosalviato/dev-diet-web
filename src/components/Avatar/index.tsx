@@ -12,8 +12,7 @@ export function Avatar({ href }: AvatarProps) {
 
       <RadixAvatar.AvatarFallback
         className="flex justify-center items-center rounded bg-zinc-900
-        w-10 h-10
-        "
+        w-10 h-10"
       >
         <User />
       </RadixAvatar.AvatarFallback>

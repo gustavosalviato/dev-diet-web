@@ -1,17 +1,15 @@
-import { parseCookies } from 'nookies'
 import { Salad } from 'lucide-react'
 import Link from 'next/link'
 
 import { MenuMobile } from '../DropDownMenu'
-import { UseUser } from '@/hooks/auth/useUser'
 import { Avatar } from '../Avatar'
 import { useEffect, useState } from 'react'
+import { useAuthContext } from '@/context/authContext'
 
 export function Header() {
   const [isClient, setIsClient] = useState(false)
-  const { '@devDiet': token } = parseCookies()
 
-  const user = UseUser()
+  const { isAuthenticated, user } = useAuthContext()
 
   useEffect(() => {
     setIsClient(true)
@@ -47,16 +45,16 @@ export function Header() {
           </Link>
 
           <Link
-            href={`/overview/${user?.sub}`}
+            href={`/overview/`}
             className="text-lg transition-all duration-300 hover:text-zinc-300"
           >
             Overview
           </Link>
         </nav>
 
-        {token && (
+        {isAuthenticated && (
           <div className="flex ml-auto gap-2 items-center">
-            <Avatar href={user?.avatarUrl!!} />
+            <Avatar href="/" />
             <div className="flex flex-col">
               <p>{user?.name}</p>
               <a
@@ -69,7 +67,7 @@ export function Header() {
           </div>
         )}
 
-        {!token && (
+        {!isAuthenticated && (
           <div className="flex ml-auto gap-2 items-center">
             <Avatar href="" />
             <p className="text-sm">
