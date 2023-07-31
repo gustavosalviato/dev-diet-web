@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { MenuMobile } from '../DropDownMenu'
 import { Avatar } from '../Avatar'
 import { useEffect, useState } from 'react'
-import { useAuthContext } from '@/context/authContext'
+import { signOut, useAuthContext } from '@/context/authContext'
 
 export function Header() {
   const [isClient, setIsClient] = useState(false)
@@ -57,12 +57,12 @@ export function Header() {
             <Avatar href="/" />
             <div className="flex flex-col">
               <p>{user?.name}</p>
-              <a
-                href="/api/auth/logout"
+              <button
+                onClick={() => signOut()}
                 className="hover:underline inline-block text-zinc-200 duration-300 transition-all mr-1 hover:text-red-300"
               >
                 logout
-              </a>
+              </button>
             </div>
           </div>
         )}
@@ -72,7 +72,7 @@ export function Header() {
             <Avatar href="" />
             <p className="text-sm">
               <Link
-                href={`https://github.com/login/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_GIT_HUB_CLIENT_ID}`}
+                href="/login"
                 className="inline-block text-zinc-200 duration-300 transition-all mr-1 hover:underline"
               >
                 Create

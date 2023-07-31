@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import Image from 'next/image'
+import Link from 'next/link'
 
 export function HeroSection() {
   return (
@@ -30,6 +31,13 @@ export function HeroSection() {
           Uncover the power of{' '}
           <span className="textindigf">balanced nutrition</span>
         </strong>
+
+        <Link
+          href={'/login'}
+          className="text-xl bg-indigo-500 text-zinc-900 font-bold rounded w-fit px-4 h-12 flex items-center justify-center mt-4 duration-300 transition-colors hover:bg-indigo-500/60"
+        >
+          Start you journey
+        </Link>
       </div>
     </motion.div>
   )

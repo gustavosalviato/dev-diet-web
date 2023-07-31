@@ -8,6 +8,7 @@ import { useQuery } from 'react-query'
 import { api } from '@/services/axios'
 import { UpdateMealModal } from '@/components/UpdateMealModal'
 import { PageWrapper } from '@/components/PageWrapper'
+import { AxiosError } from 'axios'
 
 interface Meal {
   id: string
@@ -23,10 +24,18 @@ export default function MealSlugPage() {
 
   const mealId = params.slug
 
-  async function fetchMeal(mealId: string): Promise<Meal> {
-    const mealResponse = await api.get(`/meals/user/${mealId}`)
+  async function fetchMeal(mealId: string): Promise<Meal | undefined> {
+    try {
+      const mealResponse = await api.get(`/meals/user/${mealId}`)
 
-    return mealResponse.data.meal
+      return mealResponse.data.meal
+    } catch (err) {
+      if (err instanceof AxiosError) {
+        if (err.response?.data.message === 'Unauthorized.') {
+          window.location.replace('/login')
+        }
+      }
+    }
   }
 
   const { data } = useQuery(['meal', mealId], () => fetchMeal(mealId), {

@@ -4,11 +4,48 @@ import { CreateNewMealModal } from '@/components/CreateNewMealModal'
 import { GanttChart } from 'lucide-react'
 import Link from 'next/link'
 import CircularProgress from '@mui/joy/CircularProgress'
-import { useMeals } from '@/hooks/meals/useMeals'
 import { PageWrapper } from '@/components/PageWrapper'
+import { useQuery } from 'react-query'
+import { api } from '@/services/axios'
+import { AxiosError } from 'axios'
+
+interface Meal {
+  id: string
+  name: string
+  description: string
+  createdAt: string
+  hour: string
+  isOnDiet: boolean
+}
 
 export default function PanelPage() {
-  const { data, isLoading, isFetching, error } = useMeals()
+  async function getMeals(): Promise<Meal[] | undefined> {
+    try {
+      const { data } = await api.get(`/meals`)
+
+      const meals = data.meals.map((meal: Meal) => ({
+        ...meal,
+        createdAt: new Date(meal.createdAt).toLocaleDateString('en-US', {
+          day: '2-digit',
+          month: 'short',
+          year: 'numeric',
+        }),
+      }))
+
+      return meals
+    } catch (err) {
+      console.log(err)
+      if (err instanceof AxiosError) {
+        if (err.response?.data.message === 'Unauthorized.') {
+          window.location.replace('/login')
+        }
+      }
+    }
+  }
+
+  const { data, isLoading, error, isFetching } = useQuery('meals', getMeals, {
+    staleTime: 1000 * 60 * 10, // 10 minutes
+  })
 
   return (
     <PageWrapper>

@@ -129,12 +129,12 @@ export default function LoginPage() {
               </button>
 
               <p className="text-sm text-zinc-400 text-center mt-6">
-                Do not have an account?{' '}
+                Already have an account?{' '}
                 <Link
-                  href="/signup"
+                  href="/login"
                   className="text-indigo-500 font-semibold duration-300 transition-colors hover:text-indigo-500/60"
                 >
-                  Register
+                  Sign in
                 </Link>
               </p>
             </motion.form>

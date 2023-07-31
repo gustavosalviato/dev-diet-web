@@ -1,3 +1,5 @@
+'use client'
+
 import { api } from '@/services/axios'
 import { AxiosError } from 'axios'
 import {
@@ -8,8 +10,7 @@ import {
   useState,
 } from 'react'
 import { toast } from 'react-toastify'
-import { useRouter } from 'next/navigation'
-import { setCookie, parseCookies } from 'nookies'
+import { setCookie, parseCookies, destroyCookie } from 'nookies'
 
 export interface SignInCredentials {
   email: string
@@ -31,11 +32,14 @@ interface AuthContextProviderProps {
   children: ReactNode
 }
 
+export async function signOut() {
+  destroyCookie(undefined, 'devdiet.token')
+  window.location.replace('/login')
+}
+
 export const AuthContext = createContext({} as authContextType)
 
 export function AuthContextProvider({ children }: AuthContextProviderProps) {
-  const { push } = useRouter()
-
   const [user, setUser] = useState<User>()
   const isAuthenticated = !!user
 
@@ -73,7 +77,7 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
 
       api.defaults.headers['Authorization'] = `Bearer ${token}`
 
-      push('/panel')
+      window.location.replace('/panel')
     } catch (err) {
       if (err instanceof AxiosError) {
         toast(err.response?.data.message, {

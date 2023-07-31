@@ -1,30 +1,31 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Roboto', 'sans-serif'],
+        sans: ["Roboto", "sans-serif"],
+        alt: "Bai Jamjuree",
       },
       boxShadow: {
-        sm: '0 0 0 2px #6366f1',
+        sm: "0 0 0 2px #6366f1",
       },
       animation: {
-        'fade-in': 'fade-in 100ms linear',
-        'fade-out': 'fade-out 100ms ease-in-out',
-        'scale-up': 'scale 100ms ease-in-out forwards',
-        'scale-down': 'scale 150ms ease-in-out backwards',
+        "fade-in": "fade-in 100ms linear",
+        "fade-out": "fade-out 100ms ease-in-out",
+        "scale-up": "scale 100ms ease-in-out forwards",
+        "scale-down": "scale 150ms ease-in-out backwards",
       },
       keyframes: {
-        'fade-in': {
+        "fade-in": {
           from: { opacity: 0, visibility: 0 },
           to: { opacity: 1, visibility: 1 },
         },
-        'fade-out': {
+        "fade-out": {
           from: { opacity: 1 },
           to: { opacity: 0 },
         },
@@ -36,4 +37,4 @@ module.exports = {
     },
   },
   plugins: [],
-}
+};

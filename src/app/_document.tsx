@@ -26,8 +26,14 @@ export default function Document() {
 
         <link rel="shortcut icon" href="/favicon.svg" type="image/svg" />
 
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
-          href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:ital,wght@1,700&display=swap"
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@700&display=swap"
           rel="stylesheet"
         ></link>
       </Head>

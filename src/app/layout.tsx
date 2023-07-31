@@ -2,12 +2,13 @@
 'use client'
 
 import 'react-toastify/dist/ReactToastify.css'
-import { useRouter, usePathname } from 'next/navigation'
+import { usePathname } from 'next/navigation'
+import { Roboto } from 'next/font/google'
 
 import './globals.css'
 
 import { ReactNode } from 'react'
-import { Roboto } from 'next/font/google'
+
 import { Header } from '@/components/Header'
 import { QueryClientProvider } from 'react-query'
 import { queryClient } from '@/services/react-query'
