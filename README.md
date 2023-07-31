@@ -1,4 +1,4 @@
-```jsx
+
 <h1 align="center"> Dev Diet </h1>
 
 <p align="center">
@@ -14,6 +14,7 @@
 
 ## Get Start
 
+```jsx
 To run the application follow the steps about:
 
 1- Clone the project
@@ -62,5 +63,5 @@ This project is MIT
 
 ---
 
-Made whit 💜 by gustavosalviato :wave: [Make contact](https://www.linkedin.com/in/gustavo-salviato-910048212/)
+Made with 💜 by gustavosalviato :wave: [Make contact](https://www.linkedin.com/in/gustavo-salviato-910048212/)
 ```
