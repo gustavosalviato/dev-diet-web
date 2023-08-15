@@ -33,7 +33,6 @@ api.interceptors.response.use(
           .patch("/token/refresh")
           .then((response) => {
             const { token } = response.data;
-            console.log(response);
 
             setCookie(undefined, "devdiet.token", token, {
               maxAge: 60 * 60 * 24 * 30,

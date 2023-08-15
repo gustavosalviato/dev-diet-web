@@ -54,63 +54,69 @@ export default function LoginPage() {
 
       <PageWrapper>
         <main className="max-w-7xl p-4 w-full mx-auto">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0, transition: { delay: 0.3 } }}
-            exit={{ opacity: 0, x: -20 }}
-            className="flex justify-center items-center h-screen w-full grid-cols-2 gap-28"
-          >
-            <div className="flex flex-col max-w-md w-full">
-              <h1 className="text-5xl font-bold mb-12">Dev Diet</h1>
-              <h2 className="text-5xl font-bold text-zinc-300">
-                Faça seu login na plataforma
-              </h2>
-            </div>
-            <form
-              onSubmit={handleSubmit(handleSignIn)}
-              className="max-w-md rounded bg-zinc-800 w-full flex flex-col p-16"
+          <div className="flex items-center justify-center h-screen">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0, transition: { delay: 0.3 } }}
+              exit={{ opacity: 0, x: -20 }}
+              className="grid grid-cols-1 gap-20 md:grid-cols-2 md:gap-28 items-center"
             >
-              <div className="space-y-4">
-                <TextInput
-                  id="email"
-                  placeholder="E-mail"
-                  {...register('email')}
-                />
-
-                {errors.email && <ErrorMessage error={errors.email.message} />}
-
-                <TextInput
-                  id="password"
-                  placeholder="Password"
-                  type="password"
-                  {...register('password')}
-                />
-
-                {errors.password && (
-                  <ErrorMessage error={errors.password.message} />
-                )}
+              <div className="flex flex-col max-w-md w-full">
+                <h1 className="text-3xl md:text-5xl font-bold mb-12">
+                  Dev Diet
+                </h1>
+                <h2 className="text-3xl md:text-5xl font-bold text-zinc-300">
+                  Faça seu login na plataforma
+                </h2>
               </div>
-
-              <button
-                type="submit"
-                className="rounded-md font-semibold min-w-120 px-4 flex items-center justify-center gap-2 text-zinc-50 cursor-pointer transition-all duration-300 disabled:cursor-not-allowed mt-6 bg-indigo-500 h-12 ease-in-out hover:bg-indigo-500/60 disabled:hover:bg-indigo-500/60"
-                disabled={isSubmitting}
+              <form
+                onSubmit={handleSubmit(handleSignIn)}
+                className="max-w-md rounded bg-zinc-800 w-full flex flex-col p-16"
               >
-                {isSubmitting && <Loader2 className="animate-spin" />}
-                {!isSubmitting && 'Continue'}
-              </button>
+                <div className="space-y-4">
+                  <TextInput
+                    id="email"
+                    placeholder="E-mail"
+                    {...register('email')}
+                  />
 
-              <p className="text-sm text-zinc-400 text-center mt-6">
-                Do not have an account?{' '}
-                <Link
-                  href="/signup"
-                  className="text-indigo-500 font-semibold duration-300 transition-colors hover:text-indigo-500/60"
+                  {errors.email && (
+                    <ErrorMessage error={errors.email.message} />
+                  )}
+
+                  <TextInput
+                    id="password"
+                    placeholder="Password"
+                    type="password"
+                    {...register('password')}
+                  />
+
+                  {errors.password && (
+                    <ErrorMessage error={errors.password.message} />
+                  )}
+                </div>
+
+                <button
+                  type="submit"
+                  className="rounded-md font-semibold min-w-120 px-4 flex items-center justify-center gap-2 text-zinc-50 cursor-pointer transition-all duration-300 disabled:cursor-not-allowed mt-6 bg-indigo-500 h-12 ease-in-out hover:bg-indigo-500/60 disabled:hover:bg-indigo-500/60"
+                  disabled={isSubmitting}
                 >
-                  Register
-                </Link>
-              </p>
-            </form>
-          </motion.div>
+                  {isSubmitting && <Loader2 className="animate-spin" />}
+                  {!isSubmitting && 'Continue'}
+                </button>
+
+                <p className="text-sm text-zinc-400 text-center mt-6">
+                  Do not have an account?{' '}
+                  <Link
+                    href="/signup"
+                    className="text-indigo-500 font-semibold duration-300 transition-colors hover:text-indigo-500/60"
+                  >
+                    Register
+                  </Link>
+                </p>
+              </form>
+            </motion.div>
+          </div>
         </main>
       </PageWrapper>
     </>
