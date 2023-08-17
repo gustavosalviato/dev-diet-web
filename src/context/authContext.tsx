@@ -34,6 +34,7 @@ interface AuthContextProviderProps {
 
 export async function signOut() {
   destroyCookie(undefined, 'devdiet.token')
+  destroyCookie(undefined, 'devdiet.refreshToken')
   window.location.replace('/login')
 }
 
@@ -64,9 +65,14 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
         password,
       })
 
-      const { token } = authResponse.data
+      const { token, refreshToken } = authResponse.data
 
       setCookie(undefined, 'devdiet.token', token, {
+        maxAge: 60 * 60 * 24 * 30, // 30 days
+        path: '/',
+      })
+
+      setCookie(undefined, 'devdiet.refreshToken', refreshToken, {
         maxAge: 60 * 60 * 24 * 30, // 30 days
         path: '/',
       })

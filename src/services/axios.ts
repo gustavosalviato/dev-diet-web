@@ -30,11 +30,18 @@ api.interceptors.response.use(
       if (!isRefreshing) {
         isRefreshing = true;
         api
-          .patch("/token/refresh")
+          .patch("/token/refresh", {
+            refreshToken: `${cookies["devdiet.refreshToken"]}`,
+          })
           .then((response) => {
-            const { token } = response.data;
+            const { token, refreshToken } = response.data;
 
             setCookie(undefined, "devdiet.token", token, {
+              maxAge: 60 * 60 * 24 * 30,
+              path: "/",
+            });
+
+            setCookie(undefined, "devdiet.refreshToken", refreshToken, {
               maxAge: 60 * 60 * 24 * 30,
               path: "/",
             });
