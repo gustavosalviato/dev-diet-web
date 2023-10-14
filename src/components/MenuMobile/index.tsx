@@ -2,7 +2,14 @@ import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
 import { Menu } from 'lucide-react'
 import Link from 'next/link'
 
-export function MenuMobile() {
+interface MenuMobileProps {
+  links: {
+    path: string
+    label: string
+  }[]
+}
+
+export function MenuMobile({ links }: MenuMobileProps) {
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>
@@ -22,33 +29,17 @@ export function MenuMobile() {
           <DropdownMenu.Arrow className="fill-zinc-700" />
 
           <nav className="flex flex-col gap-3">
-            <Link
-              href=""
-              className="text-sm transition-all duration-300 hover:text-zinc-300 flex items-center gap-2"
-            >
-              Sign in with Github
-            </Link>
-
-            <Link
-              href="/panel"
-              className="text-sm transition-all duration-300 hover:text-zinc-300"
-            >
-              Panel
-            </Link>
-
-            <Link
-              href="/panel"
-              className="text-sm transition-all duration-300 hover:text-zinc-300"
-            >
-              Overview
-            </Link>
-
-            <Link
-              href="/panel"
-              className="text-sm transition-all duration-300 hover:text-zinc-300"
-            >
-              Quick access
-            </Link>
+            {links.map((link) => {
+              return (
+                <Link
+                  key={link.path}
+                  href={link.path}
+                  className="text-sm transition-all duration-300 hover:text-zinc-300 flex items-center gap-2"
+                >
+                  {link.label}
+                </Link>
+              )
+            })}
           </nav>
         </DropdownMenu.Content>
       </DropdownMenu.Portal>

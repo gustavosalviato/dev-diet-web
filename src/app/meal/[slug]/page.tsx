@@ -38,9 +38,13 @@ export default function MealSlugPage() {
     }
   }
 
-  const { data } = useQuery(['meal', mealId], () => fetchMeal(mealId), {
-    refetchOnWindowFocus: false,
-  })
+  const { data } = useQuery(
+    ['meal', mealId],
+    () => fetchMeal(mealId as string),
+    {
+      refetchOnWindowFocus: false,
+    },
+  )
 
   return (
     <PageWrapper>
@@ -84,13 +88,13 @@ export default function MealSlugPage() {
 
           <div className="flex items-center mt-5">
             <UpdateMealModal
-              mealId={mealId}
+              mealId={mealId as string}
               name={data?.name!}
               description={data?.description!}
               createdAt={data?.createdAt!}
               hour={data?.hour!}
             />
-            <DeleteMealModal slug={params?.slug} />
+            <DeleteMealModal slug={params?.slug as string} />
           </div>
         </div>
       </main>

@@ -1,10 +1,11 @@
 import { Salad } from 'lucide-react'
 import Link from 'next/link'
 
-import { MenuMobile } from '../DropDownMenu'
+import { MenuMobile } from '../MenuMobile'
 import { Avatar } from '../Avatar'
 import { useEffect, useState } from 'react'
 import { signOut, useAuthContext } from '@/context/authContext'
+import { NavBar } from '../NavBar'
 
 export function Header() {
   const [isClient, setIsClient] = useState(false)
@@ -29,32 +30,27 @@ export function Header() {
           </strong>
         </div>
 
-        <nav className="items-center ml-16 gap-6 hidden md:flex">
-          <Link
-            href="/"
-            className="text-lg transition-all duration-300 hover:text-zinc-300"
-          >
-            Home
-          </Link>
+        <NavBar
+          links={[
+            {
+              label: 'Home',
+              path: '/',
+            },
+            {
+              label: 'Panel',
+              path: '/panel',
+            },
 
-          <Link
-            href="/panel"
-            className="text-lg transition-all duration-300 hover:text-zinc-300"
-          >
-            Panel
-          </Link>
-
-          <Link
-            href={`/overview/`}
-            className="text-lg transition-all duration-300 hover:text-zinc-300"
-          >
-            Overview
-          </Link>
-        </nav>
+            {
+              label: 'Overview',
+              path: '/overview',
+            },
+          ]}
+        />
 
         {isAuthenticated && (
           <div className="flex ml-auto gap-2 items-center">
-            <Avatar href="/" />
+            <Avatar />
             <div className="flex flex-col">
               <p>{user?.name}</p>
               <button
@@ -69,7 +65,7 @@ export function Header() {
 
         {!isAuthenticated && (
           <div className="flex ml-auto gap-2 items-center">
-            <Avatar href="" />
+            <Avatar />
             <p className="text-sm">
               <Link
                 href="/login"
@@ -82,7 +78,26 @@ export function Header() {
           </div>
         )}
 
-        <MenuMobile />
+        <MenuMobile
+          links={[
+            {
+              label: 'Sign in with Github',
+              path: '',
+            },
+            {
+              label: 'Panel',
+              path: '/panel',
+            },
+            {
+              label: 'Overview',
+              path: '/overview',
+            },
+            {
+              label: 'Quick Access',
+              path: '/quick-access',
+            },
+          ]}
+        />
       </header>
     </div>
   )

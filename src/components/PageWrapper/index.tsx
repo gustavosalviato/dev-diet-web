@@ -9,6 +9,7 @@ interface PageWrapperProps {
 export function PageWrapper({ children }: PageWrapperProps) {
   return (
     <motion.div
+      className="page-wrapper-container"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 20 }}
