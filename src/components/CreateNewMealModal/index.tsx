@@ -2,13 +2,12 @@
 
 import * as Dialog from '@radix-ui/react-dialog'
 import * as RadioGroup from '@radix-ui/react-radio-group'
-import { Button } from '../Button'
-import { Plus, X } from 'lucide-react'
+
 import { TextInput } from '../TextInput'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import * as zod from 'zod'
 import { ErrorMessage } from '../ErrorMessage'
+import { Button } from '../Button'
+import { X, Plus } from 'lucide-react'
+
 import { useMutation } from 'react-query'
 import { api } from '@/services/axios'
 import { UseUser } from '@/hooks/auth/useUser'
@@ -17,25 +16,12 @@ import { useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify'
 import { AxiosError } from 'axios'
 import { motion } from 'framer-motion'
+import { MealFormData, useCreateMeal } from './useCreateMeal'
 
 interface RadioOptions {
   value: string
   label: string
 }
-
-const MealFormValidationSchema = zod.object({
-  name: zod.string().min(5, {
-    message: 'name must contain at least 5 characters',
-  }),
-  description: zod.string().min(5, {
-    message: 'description must contain at least 5 characters',
-  }),
-  createdAt: zod.string(),
-  hour: zod.string(),
-  mealType: zod.string({
-    required_error: 'inform if the meal is within the diet or not',
-  }),
-})
 
 const radioOptions: RadioOptions[] = [
   {
@@ -48,19 +34,16 @@ const radioOptions: RadioOptions[] = [
   },
 ]
 
-type MealFormData = zod.infer<typeof MealFormValidationSchema>
-
 export function CreateNewMealModal() {
   const [isModalOpen, setIsModalOpen] = useState(false)
+
   const {
+    formState: { errors, isSubmitting },
     handleSubmit,
     register,
-    formState: { errors, isSubmitting },
-    setValue,
     reset,
-  } = useForm<MealFormData>({
-    resolver: zodResolver(MealFormValidationSchema),
-  })
+    setValue,
+  } = useCreateMeal()
 
   const user = UseUser()
 
@@ -134,6 +117,8 @@ export function CreateNewMealModal() {
               className="bg-zinc-800 p-6 rounded-sm border border-zinc-700 z-[21] fixed translate-x-[-50%] translate-y-[-50%] top-[50%] left-[50%] max-w-lg w-full flex flex-col"
             >
               <form
+                name="create-meal-form"
+                data-testid="create-meal-form"
                 className="flex flex-col relative"
                 onSubmit={handleSubmit(handleCreateMeal)}
               >
@@ -179,11 +164,12 @@ export function CreateNewMealModal() {
 
                 <div className="flex items-center gap-5">
                   <div className="mt-5 w-1/2">
-                    <label htmlFor="name" className="mb-2 font-medium">
+                    <label htmlFor="date" className="mb-2 font-medium">
                       Date
                     </label>
                     <TextInput
-                      id="name"
+                      data-testid="date-input"
+                      id="date"
                       type="date"
                       placeholder="Your meal"
                       {...register('createdAt')}
@@ -195,10 +181,15 @@ export function CreateNewMealModal() {
                   </div>
 
                   <div className="mt-5 w-1/2">
-                    <label htmlFor="name" className="mb-2 font-medium">
+                    <label htmlFor="time" className="mb-2 font-medium">
                       Time
                     </label>
-                    <TextInput id="name" type="time" {...register('hour')} />
+                    <TextInput
+                      data-testid="time-input"
+                      id="time"
+                      type="time"
+                      {...register('hour')}
+                    />
 
                     {errors.hour && (
                       <ErrorMessage error={errors.hour.message} />
