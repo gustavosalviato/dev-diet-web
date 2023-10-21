@@ -9,8 +9,6 @@ describe('PageWrapper', () => {
       </PageWrapper>,
     )
 
-    console.log(container)
-
     expect(container).toBeInTheDocument()
     expect(screen.getByText(/hello world/i)).toBeInTheDocument()
   })
